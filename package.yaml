@@ -20,7 +20,13 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/wraithjpr/haskell-scratch-pad#readme>
 
 dependencies:
+- aeson >= 1.4 && < 2
 - base >= 4.7 && < 5
+- bytestring >= 0.10 && < 1
+- http-types >= 0.12 && < 1
+- text >= 1.2 && < 2
+- wai >= 3.2 && < 4
+- warp >= 3.2 && < 4
 
 library:
   source-dirs: src

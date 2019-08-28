@@ -1,6 +1,10 @@
 module Main where
 
-import Lib
+import Network.Wai.Handler.Warp (run)
+
+import App (app)
 
 main :: IO ()
-main = someFunc
+main = do
+  putStrLn "http://localhost:8080"
+  run 8080 app

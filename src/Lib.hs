@@ -1,6 +1,14 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Lib
-    ( someFunc
+    ( Person (..)
     ) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import Data.Aeson
+import Data.Aeson.Types
+
+data Person = Person { name :: String, age :: Int } deriving Show
+
+instance FromJSON Person where
+    parseJSON (Object v) = Person <$> v .: "name" <*> v .: "age"
+    parseJSON v          = typeMismatch "Object" v
