@@ -4,11 +4,16 @@ module Lib
     ( Person (..)
     ) where
 
+import Control.Applicative (empty)
 import Data.Aeson
-import Data.Aeson.Types
+import Data.Monoid
 
-data Person = Person { name :: String, age :: Int } deriving Show
+data Person = Person { id :: String, name :: String, age :: Int } deriving (Show)
 
 instance FromJSON Person where
-    parseJSON (Object v) = Person <$> v .: "name" <*> v .: "age"
-    parseJSON v          = typeMismatch "Object" v
+    parseJSON (Object v) = Person <$> v .: "id" <*> v .: "name" <*> v .: "age"
+    parseJSON _          = empty 
+
+instance ToJSON Person where
+    toJSON (Person id name age) = object [ "id" .= id, "name" .= name, "age" .= age ]
+    toEncoding (Person id name age) = pairs $ "id" .= id <> "name" .= name <> "age" .= age
