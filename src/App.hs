@@ -86,3 +86,4 @@ getRequestBodyAsPerson :: Request -> IO (Maybe Person)
 getRequestBodyAsPerson request = do
     body <- strictRequestBody request
     return $ decode body
+
